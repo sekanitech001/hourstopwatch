@@ -1,0 +1,266 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" 
+          content="IE=edge"> 
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0"> 
+    <title>Oladimeji StopWatch Design</title> 
+   
+    <style>
+        body { 
+    padding: 0; 
+    margin: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; 
+} 
+  
+.container { 
+    display: flex;
+    border: 15px solid black;
+    border-radius: 40px;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 50%; 
+    height: 50vh; 
+    background-color: gray; 
+} 
+.container2{
+    height: 50vh;
+    width: 15px;
+    background-color: black;
+    border: 5px solid black;
+}
+  
+h1 {
+    color: blue;
+    border: 2px solid black;
+    width: 380px;
+    border-radius: 10px;
+    font-size: 50px;
+    text-transform: uppercase; 
+    text-align: center; 
+} 
+  
+.digit { 
+    font-size: 80px; 
+    color: #fff; 
+} 
+  
+.txt { 
+    font-size: 80px; 
+    color: #fffcd6; 
+} 
+  
+#buttons { 
+    margin-top: 50px; 
+} 
+  
+.btn { 
+    width: 100px; 
+    padding: 5px 15px; 
+    margin: 0px 20px; 
+    cursor: pointer; 
+    font-size: 20px; 
+    border-radius: 10px;
+    color: white; 
+    font-weight: 500; 
+} 
+  
+#start { 
+    background-color: black; 
+} 
+#start:hover { 
+    background-color: green; 
+} 
+  
+#stop { 
+    background-color: black; 
+} 
+#stop:hover { 
+    background-color: red; 
+} 
+  
+#reset { 
+    background-color: black; 
+}
+#reset:hover { 
+    background-color: yellow; 
+}
+@media (min-width: 400px) and (max-width: 580px) {
+    h1 {
+    width: 170px;
+    font-size: 20px;
+    text-align: center; 
+} 
+.digit { 
+    font-size: 20px;  
+} 
+  
+.txt { 
+    font-size: 20px; 
+} 
+.btn { 
+    width: 50px;  
+    font-size: 10px;
+    margin: 0px 5px; 
+    border-radius: 10px; 
+    font-weight: 300; 
+}
+}
+@media (min-width: 580px) and (max-width: 800px) {
+    h1 {
+    width: 200px;
+    font-size: 35px;
+    text-align: center; 
+} 
+.digit { 
+    font-size: 35px;  
+} 
+  
+.txt { 
+    font-size: 35px; 
+} 
+.btn { 
+    width: 85px;  
+    font-size: 25px;
+    margin: 0px 2px; 
+    border-radius: 10px; 
+    font-weight: 500; 
+}
+}
+@media (min-width: 800px) and (max-width: 1100px) {
+    h1 {
+    width: 250px;
+    font-size: 40px;
+    text-align: center; 
+} 
+.digit { 
+    font-size: 50px;  
+} 
+  
+.txt { 
+    font-size: 50px; 
+} 
+.btn { 
+    width: 120px;  
+    font-size: 35px;
+    margin: 0px 4px; 
+    border-radius: 10px; 
+    font-weight: 500; 
+}
+}
+    </style>
+</head> 
+  
+<body> 
+    <div class="container"> 
+        <h1>Stop Watch</h1> 
+        <div id="time"> 
+            <span class="digit" id="hr"> 00</span> 
+            <span class="txt">:</span> 
+            <span class="digit" id="min">00</span> 
+            <span class="txt">:</span> 
+            <span class="digit" id="sec">00</span> 
+            <span class="txt">:</span> 
+            <span class="digit" id="count">00</span> 
+        </div> 
+        <div class="row" id="buttons"> 
+            <button class="btn" id="start">Start</button> 
+            <button class="btn" id="stop">Stop</button> 
+            <button class="btn" id="reset">Reset</button> 
+        </div> 
+    </div>
+    <div class="container2"></div> 
+  
+    <script>
+        let startBtn = document.getElementById('start'); 
+        let stopBtn = document.getElementById('stop'); 
+        let resetBtn = document.getElementById('reset'); 
+
+        let hour = 0; 
+        let minute = 0; 
+        let second = 0; 
+        let count = 0; 
+
+       
+        function stopWatch() { 
+            if (timer) { 
+                count++; 
+
+                if (count == 100) { 
+                    second++; 
+                    count = 0; 
+                } 
+
+                if (second == 60) { 
+                    minute++; 
+                    second = 0; 
+                } 
+
+                if (minute == 60) { 
+                    hour++; 
+                    minute = 0; 
+                    second = 0; 
+                } 
+
+                let hrs = hour; 
+                let mins = minute; 
+                let secs = second; 
+                let counts = count; 
+
+                if (hour < 10) { 
+                    hrs = "0" + hrs; 
+                } 
+
+                if (minute < 10) { 
+                    mins = "0" + mins; 
+                } 
+
+                if (second < 10) { 
+                    secs = "0" + secs; 
+                } 
+
+                if (count < 10) { 
+                    counts = "0" + counts; 
+                } 
+
+                document.getElementById('hr').innerHTML = hrs; 
+                document.getElementById('min').innerHTML = mins; 
+                document.getElementById('sec').innerHTML = secs; 
+                document.getElementById('count').innerHTML = counts; 
+                setTimeout(stopWatch, 10); 
+            } 
+        }
+        startBtn.addEventListener('click', function () { 
+            timer = true; 
+            stopWatch(); 
+        }); 
+
+        stopBtn.addEventListener('click', function () { 
+            timer = false; 
+        }); 
+
+        resetBtn.addEventListener('click', function () { 
+            timer = false; 
+            hour = '0'; 
+            minute = '0'; 
+            second = '0'; 
+            count = '00'; 
+            document.getElementById('hr').innerHTML = "00"; 
+            document.getElementById('min').innerHTML = "00"; 
+            document.getElementById('sec').innerHTML = "00"; 
+            document.getElementById('count').innerHTML = "00"; 
+        }); 
+
+
+    </script> 
+</body> 
+    
+</html>
